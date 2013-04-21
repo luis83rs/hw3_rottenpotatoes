@@ -36,3 +36,16 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
         end
     }
 end
+
+#Then /I should( not)? see all of the movies: (.*)/ do |ifnot, movies_list|
+Then /I should( not)? see all of the movies/ do |orNot|
+  Movie.all.each_with_index {
+    |movie, index|
+      name = movie[:title]
+      if(!index) #first element
+        Then %Q{I should#{orNot} see "#{name}"}
+      else
+        And %Q{I should#{orNot} see "#{name}"}
+      end
+  }
+end

@@ -48,6 +48,13 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
 
 Scenario: no ratings selected
   # see assignment
+  	Given I am on the RottenPotatoes home page
+	When I press "Refresh"
+	Then I should not see all of the movies 
 
 #Scenario: all ratings selected
   # see assignment
+  	Given I am on the RottenPotatoes home page
+	When I check the following ratings: G, PG, PG-13, NC-17, R
+		And I press "Refresh"
+	Then I should see all of the movies 
